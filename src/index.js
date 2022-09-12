@@ -19,7 +19,7 @@ def get_tweets(PROFILE, LIMIT):
       if tweet.media:
         for medium in tweet.media:
           if("Photo" in str(medium)):
-            tweets.append({"id": tweet.id, "username": tweet.username, "content": tweet.content, "media": medium.fullUrl})
+            tweets.append({"id": tweet.id, "username": tweet.user.username, "content": tweet.content, "media": medium.fullUrl})
 
   json_string = json.dumps({ "tweets": tweets })
   return json_string
