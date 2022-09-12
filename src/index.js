@@ -19,7 +19,17 @@ def get_tweets(PROFILE, LIMIT):
       if tweet.media:
         for medium in tweet.media:
           if("Photo" in str(medium)):
-            tweets.append({"id": tweet.id, "username": tweet.user.username, "content": tweet.content, "media": medium.fullUrl})
+            tweets.append({
+              "username": tweet.user.username,
+              "date": tweet.date.strftime('%d-%m-%Y %H:%M:%S'),
+              "content": tweet.content,
+              "media": medium.fullUrl,
+              "url": tweet.url,
+              "replyCount": tweet.replyCount,
+              "retweetCount": tweet.retweetCount,
+              "likeCount": tweet.likeCount,
+              "source": tweet.source
+            })
 
   json_string = json.dumps({ "tweets": tweets })
   return json_string
@@ -28,7 +38,15 @@ def get_tweets(PROFILE, LIMIT):
     .then(data => {
       if (data === 'ERROR') reject('An error has occurred, please try again later');
       else {
-        resolve(JSON.parse(data));
+        const tweets = JSON.parse(data);
+        const tweetsNew = tweets.tweets.map(tweet => {
+          if (tweet.media) {
+            const content = tweet.content;
+            tweet.content = content.split(' ').slice(0, -1).join(' ');
+          }
+          return tweet;
+        });
+        resolve({ tweets: tweetsNew });
       }
     })
     .catch(python.Exception, (err) => reject(err));
