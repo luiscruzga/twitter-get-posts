@@ -1,4 +1,4 @@
-# instagram-get-posts
+# twitter-get-posts
 Allows to obtain the tweets of an twitter profile
 
 
