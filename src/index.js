@@ -22,7 +22,7 @@ def get_tweets(PROFILE, LIMIT):
             tweets.append({
               "username": tweet.user.username,
               "date": tweet.date.strftime('%d-%m-%Y %H:%M:%S'),
-              "content": tweet.content,
+              "content": tweet.rawContent,
               "media": medium.fullUrl,
               "url": tweet.url,
               "replyCount": tweet.replyCount,

@@ -1,6 +1,6 @@
 {
   "name": "twitter-get-posts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Allows to obtain the posts of an instagram profile",
   "main": "./src/index.js",
   "scripts": {
